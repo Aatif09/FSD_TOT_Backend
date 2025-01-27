@@ -30,8 +30,17 @@ const ans = arr.forEach(temp);
 console.log(ans)
 
 //-------------------------------------------------
-// const calculateArraySum = (input) => {
 
-// }
-// const res = calculateArraySum(arr);
-// console.log(res)
+const { add } = require("./teamA.js");
+const arr1 = [12, 22, 32, 42];
+let sum = 0;
+const temp1 = (a) => {
+  // sum += a;
+  sum = add(a, sum);
+}
+const calculateArraySum = (input) => {
+  input.forEach(temp1);
+
+}
+calculateArraySum(arr1);
+console.log(sum)
