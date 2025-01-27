@@ -11,5 +11,5 @@ const obj = {
   add: sum,
   mul: mult
 };
+// module.exports = sum
 module.exports = obj
-// export default sum;
