@@ -1,3 +1,4 @@
-const read = require("./file2.js");
-const result = read();
-console.log(result)
+const read1 = require("./file2.js");
+read1();
+console.log("middle");
+read1();
