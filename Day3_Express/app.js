@@ -1,6 +1,6 @@
 const express = require('express');
 const fspro = require('fs/promises');
-const { myreadfile } = require('./utils.js');
+const { myreadfilee, myreadfile, mywritefile } = require('./utils.js');
 const app = express();
 port = 2001;
 app.use(express.json()); // read the data from body(parse) from postman
@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 app.get('/data', async (req, res) => {
-  const data = await myreadfile("./data.json");
+  const data = await myreadfilee("./data.json");
   console.log(data)
   res.send(data);
 });
@@ -33,6 +33,39 @@ app.post('/product', async (req, res) => {
   res.json({
     status: "success",
   })
+});
+
+app.post('/newproduct', async (req, res) => {
+  try {
+    const arr = await myreadfile();
+    arr.push(req.body)
+    await mywritefile(arr);
+    res.json({
+      status: "success",
+    })
+  } catch (err) {
+    console.log("Post reading file:", err.message);
+    res.json({
+      status: "fail",
+    })
+  }
+});
+//http://www.localhost:2001/getproduct
+app.get('/getproduct', async (req, res) => {
+  try {
+    const data = await myreadfile("./writedata.json");
+    // console.log(data)
+    res.send(data);
+    res.json({
+      status: "success",
+      res: data
+    })
+  } catch (err) {
+    console.log("Post reading file:", err.message);
+    res.json({
+      status: "fail",
+    })
+  }
 });
 app.listen(port, () => {
   console.log('Server is running on port 2001');
