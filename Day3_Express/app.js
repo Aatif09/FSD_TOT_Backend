@@ -1,6 +1,6 @@
 const express = require('express');
 const fspro = require('fs/promises');
-const { myreadfilee, myreadfile, mywritefile } = require('./utils.js');
+const { myreadfilee, myreadfile, mywritefile, createNewId } = require('./utils.js');
 const app = express();
 port = 2001;
 app.use(express.json()); // read the data from body(parse) from postman
@@ -37,8 +37,11 @@ app.post('/product', async (req, res) => {
 
 app.post('/newproduct', async (req, res) => {
   try {
+    const newproduct = req.body;
     const arr = await myreadfile();
-    arr.push(req.body)
+    const newId = await createNewId(arr); // for new id
+    newproduct.id = newId;
+    arr.push(newproduct)
     await mywritefile(arr);
     res.json({
       status: "success",

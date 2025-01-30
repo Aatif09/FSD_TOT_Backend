@@ -6,6 +6,7 @@ const myreadfilee = async (loc) => {
     return realData;
   } catch (err) {
     console.log("Error reading file:", err.message);
+    return [];
   }
 }
 const path = "./writedata.json";
@@ -30,4 +31,14 @@ const mywritefile = async (data) => {
     return false;
   }
 }
-module.exports = { myreadfilee, myreadfile, mywritefile }
+const createNewId = async (arr) => {
+  const oldid = 1;
+  const arraylength = arr.length;
+  if (arraylength > 0) {
+    const lastitem = arr[arraylength - 1];
+    const lastitemid = lastitem.id;
+    return lastitemid + 1;
+  }
+  return 1;
+}
+module.exports = { myreadfilee, myreadfile, mywritefile, createNewId }
