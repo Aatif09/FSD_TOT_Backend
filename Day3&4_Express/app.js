@@ -70,6 +70,65 @@ app.get('/getproduct', async (req, res) => {
     })
   }
 });
+//http://www.localhost:2001/updateproduct/3     (PATCH)
+app.patch('/updateproduct/:id', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const newProducti = req.body;
+    const arr = await myreadfile("./writedata.json");
+
+    const productIndex = arr.findIndex((obj) => obj.id == productId);
+
+    if (productIndex != -1) {
+      const oldProduct = arr[productIndex];
+      const newProduct = { ...oldProduct, ...newProducti }; // Merge old and new product
+      arr[productIndex] = newProduct;
+      await mywritefile(arr);
+
+      res.json({
+        status: "Success",
+      });
+    } else {
+      res.json({
+        status: "Index not found again",
+      });
+    }
+  } catch (err) {
+    console.log("Error:", err.message); // Fix the variable name from 'error' to 'err'
+    res.json({
+      status: "fail",
+    });
+  }
+});
+app.patch('/updateproduct/:title', async (req, res) => {
+  try {
+    const productTitle = req.params.title; // Access 'title' from params
+    const newProducti = req.body;
+    const arr = await myreadfile("./writedata.json");
+
+    const productIndex = arr.findIndex((obj) => obj.title === productTitle); // Compare by title
+
+    if (productIndex != -1) {
+      arr[productIndex] = { ...arr[productIndex], ...newProducti }; // Merge old and new product
+      await mywritefile(arr); // Write updated array to the file
+
+      res.json({
+        status: "Success",
+      });
+    } else {
+      res.json({
+        status: "Product not found",
+      });
+    }
+  } catch (err) {
+    console.error("Error:", err.message);
+    res.status(500).json({
+      status: "fail",
+      error: err.message
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log('Server is running on port 2001');
 });
