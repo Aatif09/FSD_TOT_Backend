@@ -12,7 +12,7 @@ const productSchema = new Schema({
     required: true,
     min: 1,
   },
-  availablity: {
+  availability: {
     type: String,
     enum: ["in-stock", "out-of-stock"],
     default: "in-stock",
