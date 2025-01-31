@@ -128,6 +128,37 @@ app.patch('/updateproduct/:title', async (req, res) => {
     });
   }
 });
+app.delete('/delproducts/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const arr = await myreadfile();
+    const foundIndex = arr.findIndex((obj) => { return obj.id == id });
+    console.log(foundIndex);
+    if (foundIndex !== -1) {
+      arr.splice(foundIndex, 1); //no. of elements to be deleted
+      // we can also use delete but it creates holes
+      await mywritefile(arr);
+      res.json({
+        status: "Success",
+        id
+      });
+    }
+    else {
+      res.json({
+        status: "Product not found",
+        id
+      });
+    }
+  } catch (error) {
+    console.error("Error:", err.message);
+    res.json({
+      status: "Can not delete fail",
+      error: err.message
+    });
+  }
+
+})
+
 
 app.listen(port, () => {
   console.log('Server is running on port 2001');
