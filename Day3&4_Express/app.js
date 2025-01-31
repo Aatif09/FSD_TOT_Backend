@@ -84,17 +84,19 @@ app.patch('/updateproduct/:id', async (req, res) => {
       const newProduct = { ...oldProduct, ...newProducti }; // Merge old and new product
       arr[productIndex] = newProduct;
       await mywritefile(arr);
-
+      res.status(200);
       res.json({
         status: "Success",
       });
     } else {
+      res.status(400);
       res.json({
         status: "Index not found again",
       });
     }
   } catch (err) {
     console.log("Error:", err.message); // Fix the variable name from 'error' to 'err'
+    res.status(500);
     res.json({
       status: "fail",
     });
@@ -105,13 +107,10 @@ app.patch('/updateproduct/:title', async (req, res) => {
     const productTitle = req.params.title; // Access 'title' from params
     const newProducti = req.body;
     const arr = await myreadfile("./writedata.json");
-
     const productIndex = arr.findIndex((obj) => obj.title === productTitle); // Compare by title
-
     if (productIndex != -1) {
       arr[productIndex] = { ...arr[productIndex], ...newProducti }; // Merge old and new product
       await mywritefile(arr); // Write updated array to the file
-
       res.json({
         status: "Success",
       });
@@ -153,13 +152,12 @@ app.delete('/delproducts/:id', async (req, res) => {
     console.error("Error:", err.message);
     res.json({
       status: "Can not delete fail",
-      error: err.message
+      error: err.message,
+      code: 201
     });
   }
 
 })
-
-
 app.listen(port, () => {
   console.log('Server is running on port 2001');
 });
