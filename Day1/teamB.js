@@ -1,4 +1,11 @@
-// import sum from teamA;
+// import sum from "./teamA.js";
+
+// console.log(sum(10, 20));
+
+// const sum = require("./teamA.js");
+// console.log(sum(10, 20));
+
+//-------------------------------------------------
 // const add = require("./teamA.js");
 // const output = add(10, 20);
 // console.log(output);
@@ -19,28 +26,28 @@
 
 //-------------------------------------------------
 
-const arr = [10, 20, 30, 40];
-const temp = (a, b, c, d) => {
-  //element,index,array ,undefined
-  console.log(a, b, c, d)
-  return "Hello"
-}
-const ans = arr.forEach(temp);
-// const ans = arr.map(temp);
-console.log(ans)
+// const arr = [10, 20, 30, 40];
+// const temp = (a, b, c, d) => {
+//   //element,index,array ,undefined
+//   console.log(a, b, c, d)
+//   return "Hello"
+// }
+// const ans = arr.forEach(temp);
+// // const ans = arr.map(temp);
+// console.log(ans)
 
 //-------------------------------------------------
 
-const { add } = require("./teamA.js");
-const arr1 = [12, 22, 32, 42];
-let sum = 0;
-const temp1 = (a) => {
-  // sum += a;
-  sum = add(a, sum);
-}
-const calculateArraySum = (input) => {
-  input.forEach(temp1);
+// const { add } = require("./teamA.js");
+// const arr1 = [12, 22, 32, 42];
+// let sum = 0;
+// const temp1 = (a) => {
+//   // sum += a;
+//   sum = add(a, sum);
+// }
+// const calculateArraySum = (input) => {
+//   input.forEach(temp1);
 
-}
-calculateArraySum(arr1);
-console.log(sum)
+// }
+// calculateArraySum(arr1);
+// console.log(sum)

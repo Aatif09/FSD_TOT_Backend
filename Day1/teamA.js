@@ -12,4 +12,6 @@ const obj = {
   mul: mult
 };
 // module.exports = sum
-module.exports = obj
+module.exports = obj;
+
+// export default sum;
