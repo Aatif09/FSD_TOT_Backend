@@ -18,21 +18,38 @@ app.post('/add', (req, res) => {
 //http://www.localhost:2001/products
 app.post('/products', async (req, res) => {
   //{"title": "chips","price": 18,"company": "Lays"}
-  console.log(req.body)//body -raw 
-  const newproduct = req.body;
-  const data = [newproduct]
-  await fspro.writeFile("./ writedata.json", JSON.stringify(data));
-  res.json({
-    status: "success",
-  })
+  try {
+    console.log(req.body)//body -raw 
+    const newproduct = req.body;
+    const data = [newproduct]
+    await mywritefile(data);
+    res.json({
+      status: "success",
+    })
+  } catch (error) {
+    res.json({
+      status: "Failure",
+    })
+  }
 });
-app.post('/product', async (req, res) => {
-  //{"title": "chips","price": 18,"company": "Lays"}
-  console.log(req.body)//body -raw 
-  await fspro.writeFile("./ writedataa.json", []);
-  res.json({
-    status: "success",
-  })
+app.post('/newproducts', async (req, res) => {
+  try {
+    console.log(req.body);
+    const newProduct = req.body;
+    let existingData = [];
+    existingData = await myreadfile();
+    existingData.push(newProduct);
+    await mywritefile(existingData);
+    res.json({
+      status: "success",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "Failure",
+      message: error.message,
+    });
+  }
 });
 
 app.post('/newproduct', async (req, res) => {
@@ -102,31 +119,7 @@ app.patch('/updateproduct/:id', async (req, res) => {
     });
   }
 });
-app.patch('/updateproduct/:title', async (req, res) => {
-  try {
-    const productTitle = req.params.title; // Access 'title' from params
-    const newProducti = req.body;
-    const arr = await myreadfile("./writedata.json");
-    const productIndex = arr.findIndex((obj) => obj.title === productTitle); // Compare by title
-    if (productIndex != -1) {
-      arr[productIndex] = { ...arr[productIndex], ...newProducti }; // Merge old and new product
-      await mywritefile(arr); // Write updated array to the file
-      res.json({
-        status: "Success",
-      });
-    } else {
-      res.json({
-        status: "Product not found",
-      });
-    }
-  } catch (err) {
-    console.error("Error:", err.message);
-    res.status(500).json({
-      status: "fail",
-      error: err.message
-    });
-  }
-});
+
 app.delete('/delproducts/:id', async (req, res) => {
   try {
     const id = req.params.id;
