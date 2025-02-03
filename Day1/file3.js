@@ -1,4 +1,10 @@
-const read1 = require("./file2.js");
-read1();
+const read2 = require("./file2.js");
+read2();
 console.log("middle");
-read1();
+read2();
+
+
+// const read1 = require("./file1.js");
+// read1();
+// console.log("middle");
+// read1();
