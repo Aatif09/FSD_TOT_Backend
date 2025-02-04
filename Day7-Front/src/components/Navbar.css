@@ -1,0 +1,9 @@
+.aa{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: azure;
+  padding: 10px;
+  border-radius: 5px;
+}

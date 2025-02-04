@@ -1,11 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const app = express();
 app.use((req, res, next) => {
   console.log("Request: " + req.url);
   next();
 });
 app.use(morgan());
+app.use(cors());
 //npm i morgan
 require("./config/dbconfig.js");
 const Product = require('./models/productModelss.js');
@@ -39,45 +41,15 @@ app.post('/api/v1/products', async (req, res) => {
 // {"title": "Chips","price": 20}
 
 //http://www.localhost:2002/api/v1/products
-// app.get('/api/v1/products', async (req, res) => {
-//   try {
-//     const products = await Product.find();
-//     res.status(200);
-//     res.json({
-//       success: "Products retrieved successfully",
-//       data: products
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       status: "Fail",
-//       message: "Internal Server Error",
-//     })
-//   }
-
-// });
-//http://www.localhost:2002/api/v1/products?q=c
 app.get('/api/v1/products', async (req, res) => {
   try {
-    const { q = "", size = 4, page = 1, fields = "" - __v } = req.query;
-    console.log("Query=", q)
-    const products = Product.find();
-    if (q.length > 0) {
-      const reg = new RegExp(q, 'i');
-      products.where('title').regex(reg);
-    }
-    products.sort("price -title"); //- means ascending order
-    products.limit(size);
-    products.select(fields); // projection
-    products.skip((page - 1) * size);
-    const productss = await products;
+    const products = await Product.find();
     res.status(200);
     res.json({
       success: "Products retrieved successfully",
-      data: productss
+      data: products
     });
   } catch (error) {
-
-    console.error(error);
     res.status(500).json({
       status: "Fail",
       message: "Internal Server Error",
@@ -85,6 +57,36 @@ app.get('/api/v1/products', async (req, res) => {
   }
 
 });
+//http://www.localhost:2002/api/v1/products?q=c
+// app.get('/api/v1/products', async (req, res) => {
+//   try {
+//     const { q = "", size = 4, page = 1, fields = "" - __v } = req.query;
+//     console.log("Query=", q)
+//     const products = Product.find();
+//     if (q.length > 0) {
+//       const reg = new RegExp(q, 'i');
+//       products.where('title').regex(reg);
+//     }
+//     products.sort("price -title"); //- means ascending order
+//     products.limit(size);
+//     products.select(fields); // projection
+//     products.skip((page - 1) * size);
+//     const productss = await products;
+//     res.status(200);
+//     res.json({
+//       success: "Products retrieved successfully",
+//       data: productss
+//     });
+//   } catch (error) {
+
+//     console.error(error);
+//     res.status(500).json({
+//       status: "Fail",
+//       message: "Internal Server Error",
+//     })
+//   }
+
+// });
 app.listen(port, () => {
   console.log('Server is running on port 2002');
 });
