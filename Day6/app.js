@@ -58,7 +58,7 @@ app.post('/api/v1/products', async (req, res) => {
 //http://www.localhost:2002/api/v1/products?q=c
 app.get('/api/v1/products', async (req, res) => {
   try {
-    const { q = "", size = 4, page = 1 } = req.query;
+    const { q = "", size = 4, page = 1, fields = "" - __v } = req.query;
     console.log("Query=", q)
     const products = Product.find();
     if (q.length > 0) {
@@ -67,6 +67,7 @@ app.get('/api/v1/products', async (req, res) => {
     }
     products.sort("price -title"); //- means ascending order
     products.limit(size);
+    products.select(fields); // projection
     products.skip((page - 1) * size);
     const productss = await products;
     res.status(200);

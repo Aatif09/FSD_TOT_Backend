@@ -2,8 +2,8 @@
 
 // console.log(sum(10, 20));
 
-// const sum = require("./teamA.js");
-// console.log(sum(10, 20));
+const sum = require("./teamA.js");
+console.log(sum(10, 20));
 
 //-------------------------------------------------
 // const add = require("./teamA.js");

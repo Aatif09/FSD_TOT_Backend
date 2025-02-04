@@ -1,21 +1,19 @@
 //-----------------------------------------------------------------------------
 //JSON.parse():Receiving Data (e.g., from an API or file):
-const jsonString = '{"name": "chips", "price": 18}'; // JSON string format
-console.log(jsonString.name);  // Output: "chips"
+const jsonString = '{"name": "chips", "price": 18}';
+console.log(jsonString.name);
 
-const jsonObject = JSON.parse(jsonString);  // Now a JavaScript object
-console.log(jsonObject.name);  // Output: "chips"
+const jsonObject = JSON.parse(jsonString);
+console.log(jsonObject.name);
 //-----------------------------------------------------------------------------
-
-
 
 //-----------------------------------------------------------------------------
 //JSON.stringify():Sending or Saving Data:
-const jsonObject1 = { name: "chips", price: 18 };  // JavaScript object
-console.log(jsonObject1);  // Output: { name: 'chips', price: 18 }
+const jsonObject1 = { name: "chips", price: 18 };
+console.log(jsonObject1);
 
-const jsonString1 = JSON.stringify(jsonObject1);    // Now a JSON string
-console.log(jsonString1);  // Output: '{"name":"chips","price":18}'
+const jsonString1 = JSON.stringify(jsonObject1);
+console.log(jsonString1);
 
 
 //-----------------------------------------------------------------------------
