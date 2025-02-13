@@ -10,7 +10,7 @@ function ProductPage() {
       const response = await fetch("http://www.localhost:2002/api/v1/products");
       const data = await response.json();
       console.log(data);
-      setProducts(data.data); // Adjust this line based on your API response
+      setProducts(data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -29,9 +29,10 @@ function ProductPage() {
       <div className="cardc">
         {products.map((product) => (
           <div className="card" key={product._id}>
+            <img width={"100"} height={"100"} src={product.thumbnail} alt={product.title} />
             <h3>{product.title}</h3>
             <p>{product.company}</p>
-            <p>${product.price}</p>
+            <p>Rs.{product.price}</p>
           </div>
         ))}
       </div>

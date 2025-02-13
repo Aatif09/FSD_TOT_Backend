@@ -8,12 +8,16 @@
   gap: 2rem;
   flex-wrap: wrap;
   padding: 2rem;
-  background-color: #f2f2f2;
+  background-color: cyan;
 
 }
 .card{
   border: 1px solid blue;
   padding: 2rem;
-  background-color: #f2f2f2;
+  background-color: yellowgreen;
 
+}
+img{
+  width:"50%"; 
+  height:"50%"
 }

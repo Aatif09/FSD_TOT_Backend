@@ -17,11 +17,12 @@ const productSchema = new Schema({
     enum: ["in-stock", "out-of-stock"],
     default: "in-stock",
   },
-
-
 }, { timestamps: true });
 
 const Product = mongoose.model('products', productSchema);
 
 
 module.exports = Product;
+
+
+// npm i bcrypt

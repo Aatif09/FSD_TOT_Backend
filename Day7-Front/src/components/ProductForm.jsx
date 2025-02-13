@@ -1,11 +1,31 @@
 function ProductForm() {
+  const postProduct = (dataobject) => {
+    const url = 'http://www.localhost:2002/api/v1/products';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataobject)
+    })
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e)
     const values = e.target;
     const title = values[0].value;
     const company = values[1].value;
-    console.log(title, company)
+    const price = values[2].value;
+    const discount = values[3].value;
+    const quantity = values[4].value;
+    const thumbnail = values[5].value;
+    const dataobject = {
+      title: title, company: company || undefined, price: price, discount: discount || undefined, quantity: quantity || undefined, thumbnail: thumbnail || undefined,
+    }
+    console.log(dataobject)
+
+    console.log(title, company, price, discount, quantity, thumbnail)
+    postProduct(dataobject);
   };
   return (
     <div><h2>Welcome to ProductForm</h2>
@@ -41,9 +61,10 @@ function ProductForm() {
           </label>
         </div>
         <div></div>
+
         <div>
           <label>
-            Product discount
+            Thumbnail
             <input type="text" name="thumbnail" />
           </label>
         </div>

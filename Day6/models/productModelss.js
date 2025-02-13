@@ -18,8 +18,6 @@ const productSchema = new Schema({
     default: 1,
   },
   thumbnail: String,
-
-
 }, { timestamps: true });
 
 const Product = mongoose.model('products', productSchema);
