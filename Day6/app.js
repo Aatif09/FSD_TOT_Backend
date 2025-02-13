@@ -10,7 +10,7 @@ const { sendEmail } = require("./utils/emailhelper.js");
 const app = express();
 app.use(cors({
   credentials: true,
-  origin: "http://localhost:5173",
+  origin: process.env.Frontend_Url,
 }));
 app.use((req, res, next) => {
   console.log("Request: " + req.url);
