@@ -6,7 +6,7 @@ function LoginPage() {
       e.preventDefault();
       const email = e.target.email.value;
       const password = e.target.password.value;
-      const response = await fetch("http://www.localhost:2002/api/v1/login", {
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/v1/login", {
         method: "POST",
         credentials: "include",  // Include credentials for cross-origin requests
         body: JSON.stringify({ email, password }),

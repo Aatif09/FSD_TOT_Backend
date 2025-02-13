@@ -9,7 +9,7 @@ const SignUpPage = () => {
       const email = e.target.email.value;
       console.log(email)
       if (!isOtpSent) {
-        const response = await fetch("http://www.localhost:2002/api/v1/otps",
+        const response = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/v1/otps",
           {
             method: "POST",
             body: JSON.stringify({ email: email }),
@@ -34,7 +34,7 @@ const SignUpPage = () => {
           alert("Passwords do not match");
           return;
         }
-        const response = await fetch("http://www.localhost:2002/api/v1/users",
+        const response = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/v1/users",
           {
             method: "POST",
             body: JSON.stringify({ email, otp, password }),

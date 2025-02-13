@@ -1,6 +1,6 @@
 function ProductForm() {
   const postProduct = (dataobject) => {
-    const url = 'http://www.localhost:2002/api/v1/products';
+    const url = import.meta.env.VITE_BACKEND_URL + '/api/v1/products';
     fetch(url, {
       method: 'POST',
       headers: {

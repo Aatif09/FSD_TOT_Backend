@@ -7,7 +7,7 @@ function ProductPage() {
 
   const getData = async () => {
     try {
-      const response = await fetch("http://www.localhost:2002/api/v1/products");
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/v1/products");
       const data = await response.json();
       console.log(data);
       setProducts(data.data);
